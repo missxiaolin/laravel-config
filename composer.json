@@ -1,0 +1,28 @@
+{
+    "name": "xiaolin/laravel-config",
+    "description": "config",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "小林",
+            "email": "462441355@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lin\\Config\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=5.6"
+    }
+}
