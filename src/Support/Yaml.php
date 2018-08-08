@@ -56,4 +56,22 @@ class Yaml
         return $content;
     }
 
+    /**
+     * 新增环境
+     * @param $file
+     * @param $from
+     * @param $to
+     * @return bool|int
+     */
+    public function copy($file, $from, $to)
+    {
+
+        $config = $this->load($file);
+
+        if (isset($config[$from])) {
+            return $this->save($file, $config[$from], $to);
+        }
+
+        return false;
+    }
 }
