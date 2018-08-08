@@ -17,7 +17,7 @@ dev:
 ```php
 <?php
 $file   = 'config.yml';
-yml_read($file);
+Yaml::getInstance()->load($file);
 ```
 
 ## 写入
@@ -25,7 +25,7 @@ yml_read($file);
 ```php
 <?php
 $file   = 'config.yml';
-$data   = yml_read($file);
+$data   = Yaml::getInstance()->save($file, $data);
 $data['mysql']['port'] = 3307;
 yml_write($file,$data);
 ```
