@@ -41,4 +41,11 @@ class BaseTest extends TestCase
 //        dd(Yaml::getInstance()->load($this->file,'local'));
         $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3306}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
     }
+
+    public function testCopyYml()
+    {
+        $file = TESTS_PATH . '/config1.yml';
+        $data = Yaml::getInstance()->copy($file, 'dev', 'prd');
+        $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3306}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}},"prd":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
+    }
 }
