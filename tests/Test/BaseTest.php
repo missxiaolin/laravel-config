@@ -25,9 +25,18 @@ class BaseTest extends TestCase
         $this->assertTrue(true);
     }
 
+    public function testWriteYml()
+    {
+        $file = $this->file;
+        $data['mysql']['host'] = '127.0.0.1';
+        $data['mysql']['port'] = 3306;
+        $data = yml_write($file, $data, 'local');
+        $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3306}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
+    }
+
     public function testReadYml()
     {
-        $data = yml_read($this->file, 'all');
-        $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3307}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
+        $data = yml_read($this->file);
+        $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3306}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
     }
 }

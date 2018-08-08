@@ -17,7 +17,7 @@ if (!function_exists('yml_read')) {
     function yml_read($file, $key = null)
     {
         $yaml = \Symfony\Component\Yaml\Yaml::parseFile($file);
-        if ($key == 'all') {
+        if (!$key) {
             return $yaml;
         }
         return \Xiao\Support\Arr::get($yaml, $key);
@@ -35,14 +35,19 @@ if (!function_exists('yml_write')) {
      */
     function yml_write($file, $data, $key = null)
     {
-        $content = yml_read($file, 'all');
+        if (!$key) {
+            $message = sprintf('key "%s" required.', $file);
+            throw new \Symfony\Component\Yaml\Exception\ParseException($message);
+        }
+        $content = yml_read($file);
         $content[$key] = $data;
         $yaml = \Symfony\Component\Yaml\Yaml::dump($content, 4);
         if (!is_writable($file)) {
             $message = sprintf('File "%s" cannot be write.', $file);
             throw new \Symfony\Component\Yaml\Exception\ParseException($message);
         }
+        file_put_contents($file, $yaml);
 
-        return file_put_contents($file, $yaml);
+        return yml_read($file);
     }
 }
