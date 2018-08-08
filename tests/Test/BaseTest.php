@@ -8,6 +8,7 @@
 
 namespace Tests\Test;
 
+use Lin\Config\Support\Yaml;
 use Tests\TestCase;
 
 class BaseTest extends TestCase
@@ -36,7 +37,8 @@ class BaseTest extends TestCase
 
     public function testReadYml()
     {
-        $data = yml_read($this->file);
+        $data = Yaml::getInstance()->load($this->file);
+//        dd(Yaml::getInstance()->load($this->file,'local'));
         $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3306}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
     }
 }
