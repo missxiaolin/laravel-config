@@ -24,7 +24,9 @@
     },
     "require": {
         "php": ">=7.0",
-        "symfony/yaml": "^4.1"
+        "symfony/yaml": "^4.1",
+        "symfony/var-dumper": "^4.1",
+        "xiaolin/support-arr": "^0.0.1"
     },
     "require-dev": {
         "phpunit/phpunit": ">=5.6"

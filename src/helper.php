@@ -20,7 +20,7 @@ if (!function_exists('yml_read')) {
         if ($key == 'all') {
             return $yaml;
         }
-        return $yaml;
+        return \Xiao\Support\Arr::get($yaml, $key);
     }
 }
 

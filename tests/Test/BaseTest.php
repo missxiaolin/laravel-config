@@ -8,17 +8,26 @@
 
 namespace Tests\Test;
 
-use Lin\Swoole\Common\File\File;
-use Tests\Test\App\ExceptionJob;
-use Tests\Test\App\ManyJob;
-use Tests\Test\App\Queue;
-use Tests\Test\App\TestJob;
 use Tests\TestCase;
 
 class BaseTest extends TestCase
 {
+    public $file;
+
+    public function __construct(string $name = null, array $data = [], string $dataName = '')
+    {
+        $this->file = TESTS_PATH . '/config.yml';
+        parent::__construct($name, $data, $dataName);
+    }
+
     public function testTable()
     {
         $this->assertTrue(true);
+    }
+
+    public function testReadYml()
+    {
+        $data = yml_read($this->file, 'all');
+        $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3307}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
     }
 }
