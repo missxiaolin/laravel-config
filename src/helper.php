@@ -11,19 +11,16 @@ if (!function_exists('yml_read')) {
     /**
      * 读取yaml配置
      * @param $file
-     * @param null $env
+     * @param null $key
      * @return mixed
      */
-    function yml_read($file, $env = null)
+    function yml_read($file, $key = null)
     {
-        if (!$env) {
-            $env = env("APP_ENV");
-        }
         $yaml = \Symfony\Component\Yaml\Yaml::parseFile($file);
-        if ($env == 'all') {
+        if ($key == 'all') {
             return $yaml;
         }
-        return array_get($yaml, $env, []);
+        return $yaml;
     }
 }
 
@@ -33,18 +30,13 @@ if (!function_exists('yml_write')) {
      * 读取yaml配置
      * @param $file
      * @param $data
-     * @param null $env
+     * @param null $key
      * @return bool|int
      */
-    function yml_write($file, $data, $env = null)
+    function yml_write($file, $data, $key = null)
     {
-
-        if (!$env) {
-            $env = env("APP_ENV");
-        }
-
         $content = yml_read($file, 'all');
-        $content[$env] = $data;
+        $content[$key] = $data;
         $yaml = \Symfony\Component\Yaml\Yaml::dump($content, 4);
         if (!is_writable($file)) {
             $message = sprintf('File "%s" cannot be write.', $file);

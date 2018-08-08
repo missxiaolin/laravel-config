@@ -19,5 +19,6 @@ class BaseTest extends TestCase
 {
     public function testTable()
     {
+        $this->assertTrue(true);
     }
 }
