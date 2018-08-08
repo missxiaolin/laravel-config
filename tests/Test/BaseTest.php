@@ -31,7 +31,7 @@ class BaseTest extends TestCase
         $file = $this->file;
         $data['mysql']['host'] = '127.0.0.1';
         $data['mysql']['port'] = 3306;
-        $data = yml_write($file, $data, 'local');
+        $data = Yaml::getInstance()->save($file, $data);
         $this->assertEquals('{"local":{"mysql":{"host":"127.0.0.1","port":3306}},"dev":{"mysql":{"host":"127.0.0.1","port":3306}}}', json_encode($data, true));
     }
 

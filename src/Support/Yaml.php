@@ -9,6 +9,7 @@
 namespace Lin\Config\Support;
 
 use Lin\Config\Common\InstanceTrait;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml as Basic;
 use Xiao\Support\Arr;
 
@@ -31,6 +32,28 @@ class Yaml
         }
 
         return Arr::get($yaml, $key, '');
+    }
+
+    /**
+     * 将配置写入到文件
+     * @param $file
+     * @param $data
+     * @param string $key
+     * @return bool|int
+     */
+    public function save($file, $data, $key = 'local')
+    {
+        $content = $this->load($file);
+        $content[$key] = $data;
+
+        $yaml = Basic::dump($content, 4);
+
+        if (!is_writable($file)) {
+            $message = sprintf('File "%s" cannot be write.', $file);
+            throw new ParseException($message);
+        }
+        file_put_contents($file, $yaml);
+        return $content;
     }
 
 }
