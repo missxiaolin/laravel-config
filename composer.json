@@ -25,10 +25,10 @@
     "require": {
         "php": ">=7.0",
         "symfony/yaml": "^4.1",
-        "symfony/var-dumper": "^4.1",
         "xiaolin/support-arr": "^0.0.1"
     },
     "require-dev": {
+        "symfony/var-dumper": "^4.1",
         "phpunit/phpunit": ">=5.6"
     }
 }
